@@ -103,3 +103,4 @@ The site features a sophisticated glassmorphism design system:
 - **CSS Architecture**: Layered approach with base, components, and utilities
 - **Performance**: Astro's island architecture minimizes client-side JavaScript
 - **Modern Standards**: React 19, latest Astro, and current CSS techniques
+- push when your done making changes to the website
