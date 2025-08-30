@@ -1,17 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import GlassNavbar from '../components/ui/GlassNavbar';
-import Hero from '../components/sections/Hero.astro';
+import { AutoRepairHeroSection } from '../components/sections/AutoRepairHeroSection';
 import Services from '../components/sections/Services.astro';
 import BlogSection from '../components/sections/BlogSection.astro';
+import Contact from '../components/sections/Contact.astro';
 ---
 
 <BaseLayout title="Auto Repair Shop Insurance | Comprehensive Coverage Solutions">
-  <GlassNavbar client:load />
-  
   <main>
-    <Hero />
+    <AutoRepairHeroSection client:load />
     <Services />
     <BlogSection />
+    <Contact />
   </main>
 </BaseLayout>
