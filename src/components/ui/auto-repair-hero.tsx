@@ -45,12 +45,12 @@ export const AutoRepairHero = React.forwardRef<HTMLDivElement, AutoRepairHeroPro
           {/* Moving Car Image */}
           <motion.div 
             style={{ x, opacity }} 
-            className="absolute top-[30%] left-0 z-20 flex items-center"
+            className="absolute top-[35%] left-0 z-20 flex items-center"
           >
             <img
               src="/car.webp"
               alt="Car moving across screen"
-              className="w-80 h-auto sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[40rem] max-w-none"
+              className="w-[20rem] h-auto sm:w-[24rem] md:w-[32rem] lg:w-[40rem] xl:w-[48rem] 2xl:w-[56rem] max-w-none"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
