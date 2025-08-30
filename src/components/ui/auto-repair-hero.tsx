@@ -18,9 +18,9 @@ export const AutoRepairHero = React.forwardRef<HTMLDivElement, AutoRepairHeroPro
       offset: ["start end", "end start"],
     });
 
-    // Car movement across screen
-    const x = useTransform(scrollYProgress, [0.1, 0.8], [`-${3*screenWidth}px`, `${1.5*screenWidth}px`]);
-    const opacity = useTransform(scrollYProgress, [0.1, 0.25, 0.7, 0.8], [0, 1, 1, 0]);
+    // Car movement across screen - slower animation with more scroll sensitivity
+    const x = useTransform(scrollYProgress, [0.05, 0.9], [`-${3*screenWidth}px`, `${1.5*screenWidth}px`]);
+    const opacity = useTransform(scrollYProgress, [0.05, 0.2, 0.75, 0.9], [0, 1, 1, 0]);
 
     return (
       <div ref={targetRef} className={cn("relative h-[200vh]", className)} {...props}>
@@ -45,12 +45,12 @@ export const AutoRepairHero = React.forwardRef<HTMLDivElement, AutoRepairHeroPro
           {/* Moving Car Image */}
           <motion.div 
             style={{ x, opacity }} 
-            className="absolute top-1/2 left-0 z-20 flex items-center"
+            className="absolute top-[40%] left-0 z-20 flex items-center"
           >
             <img
               src="/car.webp"
               alt="Car moving across screen"
-              className="w-48 h-auto md:w-64 lg:w-80 max-w-none"
+              className="w-56 h-auto md:w-72 lg:w-96 max-w-none"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
