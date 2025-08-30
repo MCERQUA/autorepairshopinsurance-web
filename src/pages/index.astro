@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { AutoRepairHeroSection } from '../components/sections/AutoRepairHeroSection';
+import { Navigation } from '../components/ui/navigation';
 import Services from '../components/sections/Services.astro';
 import BlogSection from '../components/sections/BlogSection.astro';
 import Contact from '../components/sections/Contact.astro';
@@ -9,6 +10,7 @@ import Contact from '../components/sections/Contact.astro';
 <BaseLayout title="Auto Repair Shop Insurance | Comprehensive Coverage Solutions">
   <main>
     <AutoRepairHeroSection client:load />
+    <Navigation client:load />
     <Services />
     <BlogSection />
     <Contact />
