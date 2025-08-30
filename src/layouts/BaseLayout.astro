@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Comprehensive auto repair shop insurance coverage. Protect your business with specialized insurance solutions for automotive service professionals." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-dark-100 via-dark-200 to-dark-300 text-white">
+    <slot />
+  </body>
+</html>

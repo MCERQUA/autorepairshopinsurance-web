@@ -1,16 +1,17 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlassNavbar from '../components/ui/GlassNavbar';
+import Hero from '../components/sections/Hero.astro';
+import Services from '../components/sections/Services.astro';
+import BlogSection from '../components/sections/BlogSection.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Auto Repair Shop Insurance | Comprehensive Coverage Solutions">
+  <GlassNavbar client:load />
+  
+  <main>
+    <Hero />
+    <Services />
+    <BlogSection />
+  </main>
+</BaseLayout>

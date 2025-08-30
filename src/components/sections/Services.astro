@@ -1,0 +1,130 @@
+---
+import GlassCard from '../ui/GlassCard';
+import GlassButton from '../ui/GlassButton';
+
+const services = [
+  {
+    title: "General Liability Insurance",
+    description: "Comprehensive protection against customer injuries, property damage, and professional liability claims.",
+    features: ["Customer injury protection", "Property damage coverage", "Legal defense costs", "Professional liability"],
+    icon: "shield"
+  },
+  {
+    title: "Commercial Property Insurance", 
+    description: "Safeguard your shop, equipment, tools, and inventory from theft, fire, and natural disasters.",
+    features: ["Building coverage", "Equipment protection", "Tool replacement", "Inventory coverage"],
+    icon: "building"
+  },
+  {
+    title: "Workers' Compensation",
+    description: "Required coverage for employee injuries, medical expenses, and lost wages in the workplace.",
+    features: ["Medical expense coverage", "Lost wage compensation", "Disability benefits", "Legal compliance"],
+    icon: "users"
+  },
+  {
+    title: "Commercial Auto Insurance",
+    description: "Coverage for business vehicles, including service trucks, tow trucks, and customer shuttles.",
+    features: ["Vehicle damage coverage", "Liability protection", "Uninsured motorist", "Cargo protection"],
+    icon: "truck"
+  },
+  {
+    title: "Cyber Liability Insurance",
+    description: "Protection against data breaches, cyber attacks, and digital security incidents.",
+    features: ["Data breach response", "Identity theft coverage", "Business interruption", "Legal expenses"],
+    icon: "shield-check"
+  },
+  {
+    title: "Garage Keepers Liability",
+    description: "Essential coverage for customer vehicles in your care, custody, and control.",
+    features: ["Customer vehicle damage", "Theft protection", "Fire and vandalism", "Comprehensive coverage"],
+    icon: "car"
+  }
+];
+
+function getIconSvg(iconName: string) {
+  const icons = {
+    shield: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>`,
+    building: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>`,
+    users: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>`,
+    truck: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>`,
+    'shield-check': `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>`,
+    car: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17l4 4 4-4m-4-5v9"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>`
+  };
+  return icons[iconName] || icons.shield;
+}
+---
+
+<section class="section-padding bg-gradient-to-b from-dark-200 to-dark-300">
+  <div class="max-w-7xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        <span class="text-gradient">Insurance Solutions</span>
+        <br />
+        <span class="text-white">for Auto Repair Shops</span>
+      </h2>
+      <p class="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+        Comprehensive coverage designed specifically for auto repair businesses. 
+        Protect your shop, employees, and customers with our specialized insurance programs.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {services.map((service) => (
+        <GlassCard hover={true} client:load>
+          <div class="h-full flex flex-col">
+            <!-- Icon and Title -->
+            <div class="flex items-center gap-4 mb-4">
+              <div class="flex-shrink-0">
+                <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <Fragment set:html={getIconSvg(service.icon)} />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white">{service.title}</h3>
+            </div>
+            
+            <!-- Description -->
+            <p class="text-white/70 mb-6 leading-relaxed">{service.description}</p>
+            
+            <!-- Features -->
+            <div class="flex-grow">
+              <h4 class="text-sm font-semibold text-white/90 mb-3 uppercase tracking-wider">Key Features:</h4>
+              <ul class="space-y-2">
+                {service.features.map((feature) => (
+                  <li class="flex items-center gap-2 text-sm text-white/70">
+                    <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </GlassCard>
+      ))}
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center">
+      <GlassCard client:load>
+        <div class="text-center py-8">
+          <h3 class="text-2xl font-bold text-white mb-4">Ready to Get Protected?</h3>
+          <p class="text-white/80 mb-6 max-w-2xl mx-auto">
+            Get a custom quote tailored to your auto repair shop's specific needs. 
+            Our experts will help you find the right coverage at the best price.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <GlassButton href="/quote" variant="primary" size="lg" client:load>
+              Get Free Quote
+            </GlassButton>
+            <GlassButton href="/contact" variant="secondary" size="lg" client:load>
+              Speak with Agent
+            </GlassButton>
+          </div>
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</section>

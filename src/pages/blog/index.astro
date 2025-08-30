@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GlassNavbar from '../../components/ui/GlassNavbar';
+import GlassCard from '../../components/ui/GlassCard';
+import GlassButton from '../../components/ui/GlassButton';
+
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<BaseLayout title="Auto Repair Shop Insurance Blog | Expert Insights & Tips">
+  <GlassNavbar client:load />
+  
+  <main class="min-h-screen pt-16">
+    <!-- Page Header -->
+    <section class="section-padding bg-gradient-to-b from-dark-100 to-dark-200">
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          <span class="text-gradient">Insurance Insights</span>
+          <br />
+          <span class="text-white">for Auto Repair Professionals</span>
+        </h1>
+        <p class="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          Expert insights, industry updates, and practical guidance to help protect and grow your auto repair business.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="section-padding bg-gradient-to-b from-dark-200 to-dark-300">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPosts.map((post) => (
+            <GlassCard hover={true} client:load>
+              <article class="h-full flex flex-col">
+                <!-- Featured Badge -->
+                {post.data.featured && (
+                  <div class="mb-4">
+                    <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-300 bg-blue-500/20 rounded-full">
+                      <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      Featured
+                    </span>
+                  </div>
+                )}
+
+                <!-- Article Image Placeholder -->
+                <div class="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg mb-4 flex items-center justify-center">
+                  <svg class="w-12 h-12 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+                
+                <div class="flex-grow">
+                  <!-- Meta Information -->
+                  <div class="flex items-center gap-3 mb-3 text-sm">
+                    <time class="text-blue-400 font-medium">
+                      {post.data.publishDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    <span class="text-white/60">•</span>
+                    <span class="text-white/70">{post.data.author}</span>
+                  </div>
+                  
+                  <!-- Title -->
+                  <h2 class="text-xl font-semibold text-white mb-3 leading-tight">
+                    {post.data.title}
+                  </h2>
+                  
+                  <!-- Description -->
+                  <p class="text-white/70 mb-4 leading-relaxed">
+                    {post.data.description}
+                  </p>
+                  
+                  <!-- Tags -->
+                  {post.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {post.data.tags.slice(0, 3).map((tag) => (
+                        <span class="px-2 py-1 text-xs font-medium text-purple-300 bg-purple-500/20 rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <!-- Read More Button -->
+                <div class="mt-auto">
+                  <GlassButton 
+                    href={`/blog/${post.slug}`} 
+                    variant="primary" 
+                    size="sm" 
+                    className="w-full" 
+                    client:load
+                  >
+                    Read Full Article
+                  </GlassButton>
+                </div>
+              </article>
+            </GlassCard>
+          ))}
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-16 text-center">
+          <GlassCard client:load>
+            <div class="text-center py-12">
+              <h2 class="text-3xl font-bold text-white mb-4">Need Insurance Guidance?</h2>
+              <p class="text-white/80 mb-8 max-w-2xl mx-auto text-lg">
+                Our insurance experts are here to help you navigate the complexities of auto repair shop coverage. 
+                Get personalized advice and competitive quotes.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <GlassButton href="/quote" variant="primary" size="lg" client:load>
+                  Get Free Quote
+                </GlassButton>
+                <GlassButton href="/contact" variant="secondary" size="lg" client:load>
+                  Speak with Expert
+                </GlassButton>
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

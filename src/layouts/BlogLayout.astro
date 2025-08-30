@@ -1,0 +1,147 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import GlassNavbar from '../components/ui/GlassNavbar';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    publishDate: Date;
+    author: string;
+    image?: {
+      url: string;
+      alt: string;
+    };
+    tags: string[];
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <GlassNavbar client:load />
+  
+  <main class="min-h-screen pt-16">
+    <!-- Article Header -->
+    <section class="section-padding bg-gradient-to-b from-dark-100 to-dark-200">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-card p-8 md:p-12 mb-8">
+          <!-- Meta Information -->
+          <div class="flex flex-wrap items-center gap-4 mb-6 text-sm">
+            <time class="text-blue-400 font-medium">
+              {frontmatter.publishDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            <span class="text-white/60">•</span>
+            <span class="text-white/80">By {frontmatter.author}</span>
+          </div>
+          
+          <!-- Title -->
+          <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            {frontmatter.title}
+          </h1>
+          
+          <!-- Description -->
+          <p class="text-xl text-white/80 mb-8 leading-relaxed">
+            {frontmatter.description}
+          </p>
+          
+          <!-- Tags -->
+          {frontmatter.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {frontmatter.tags.map((tag) => (
+                <span class="px-3 py-1 text-sm font-medium text-blue-300 bg-blue-500/20 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section-padding bg-gradient-to-b from-dark-200 to-dark-300">
+      <div class="max-w-4xl mx-auto">
+        <article class="glass-card p-8 md:p-12 prose prose-lg prose-invert max-w-none">
+          <slot />
+        </article>
+        
+        <!-- Back to Blog -->
+        <div class="mt-12 text-center">
+          <a 
+            href="/blog" 
+            class="inline-flex items-center gap-2 glass-button text-white hover:text-blue-300 transition-colors duration-300"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to All Articles
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-white/90;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-white font-bold;
+  }
+  
+  .prose h2 {
+    @apply text-3xl mt-12 mb-6;
+  }
+  
+  .prose h3 {
+    @apply text-2xl mt-8 mb-4;
+  }
+  
+  .prose h4 {
+    @apply text-xl mt-6 mb-3;
+  }
+  
+  .prose p {
+    @apply mb-6 leading-relaxed;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-6 pl-6;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose strong {
+    @apply text-white font-semibold;
+  }
+  
+  .prose a {
+    @apply text-blue-400 hover:text-blue-300 transition-colors duration-200;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-blue-500 pl-6 my-6 italic text-white/80;
+  }
+  
+  .prose code {
+    @apply bg-white/10 text-blue-300 px-2 py-1 rounded text-sm;
+  }
+  
+  .prose pre {
+    @apply bg-dark-400 p-4 rounded-lg overflow-x-auto;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+</style>

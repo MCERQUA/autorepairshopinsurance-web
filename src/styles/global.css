@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  html {
+    @apply dark;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-dark-100 via-dark-200 to-dark-300 text-white min-h-screen;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-glass bg-glass-gradient border border-white/20 shadow-glass;
+    border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)) 1;
+  }
+  
+  .glass-button {
+    @apply glass px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+  
+  .glass-card {
+    @apply glass p-6 rounded-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent;
+  }
+  
+  .section-padding {
+    @apply px-4 py-16 md:px-6 lg:px-8;
+  }
+}
